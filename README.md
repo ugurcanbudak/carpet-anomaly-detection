@@ -393,9 +393,6 @@ python train.py --help
 
 ## License
 
-This project is for educational purposes as part of an interview assignment.
 The MVTec AD dataset is licensed under CC BY-NC-SA 4.0.
 
 ---
-
-*Created for UPM Summer Trainee Assessment*
