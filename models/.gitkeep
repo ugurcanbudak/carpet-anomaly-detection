@@ -1,0 +1,2 @@
+# Model weights are not tracked in git (too large)
+# Run `python src/train.py --model both` to generate them
