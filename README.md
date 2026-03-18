@@ -4,6 +4,70 @@ A comparative study of two state-of-the-art anomaly detection approaches for det
 
 ---
 
+## Quick Start
+
+### Project Structure
+
+```
+carpet-anomaly-detection/
+├── src/
+│   ├── config.py          # Configuration and hyperparameters
+│   ├── dataset.py         # Data loading utilities
+│   ├── padim.py           # PaDiM implementation
+│   ├── patchcore.py       # PatchCore implementation
+│   ├── evaluation.py      # Metrics and visualization
+│   └── train.py           # Training script (CLI)
+├── models/                 # Saved model weights (generated)
+├── outputs/                # Results and visualizations (generated)
+├── requirements.txt        # Dependencies
+└── README.md
+```
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/ugurcanbudak/carpet-anomaly-detection.git
+cd carpet-anomaly-detection
+
+# Create virtual environment
+python -m venv venv
+venv\Scripts\activate     # Windows
+# or: source venv/bin/activate  # Linux/Mac
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Place MVTec carpet data in parent directory
+# Expected structure: ../carpet/train/good/, ../carpet/test/*, ../carpet/ground_truth/*
+```
+
+### Usage
+
+```bash
+cd src
+
+# Train both models (~20 minutes on CPU)
+python train.py --model both
+
+# Train individual model
+python train.py --model padim
+python train.py --model patchcore
+
+# Evaluate pre-trained models only
+python train.py --model both --eval-only
+
+# Show help
+python train.py --help
+```
+
+**Expected output**:
+- Model weights saved to `models/`
+- Result plots saved to `outputs/`
+- Metrics printed to console
+
+---
+
 ## 1. Problem Interpretation
 
 ### What the Problem Is
@@ -275,109 +339,6 @@ Comparing them demonstrates understanding of:
 **Expected benefit**: Better precision-recall trade-off for each defect type
 
 **Requires**: Labeled validation set
-
----
-
-## Dataset
-
-**MVTec Anomaly Detection - Carpet Category**
-
-| Split | Normal | Defective | Total |
-|-------|--------|-----------|-------|
-| Training | 280 | 0 | 280 |
-| Testing | 28 | 89 | 117 |
-
-**Defect Types**: color (19), cut (17), hole (17), metal_contamination (17), thread (19)
-
-**Original Size**: 1024×1024 pixels (resized to 128×128 for this project)
-
-**Ground Truth**: Pixel-level binary masks for all defective images
-
----
-
-## Project Structure
-
-```
-carpet-anomaly-detection/
-├── src/
-│   ├── config.py          # Configuration and hyperparameters
-│   ├── dataset.py         # Data loading utilities
-│   ├── padim.py           # PaDiM implementation
-│   ├── patchcore.py       # PatchCore implementation
-│   ├── evaluation.py      # Metrics and visualization
-│   └── train.py           # Training script (CLI)
-├── models/                 # Saved model weights
-│   ├── padim_model.pth
-│   └── patchcore_model.pth
-├── outputs/                # Results and visualizations
-│   ├── padim_results.png
-│   ├── padim_visualizations.png
-│   ├── patchcore_results.png
-│   └── patchcore_visualizations.png
-├── requirements.txt        # Dependencies
-├── README.md              # This file
-```
-
----
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/ugurcanbudak/carpet-anomaly-detection.git
-cd carpet-anomaly-detection
-
-# Create virtual environment
-python -m venv venv
-venv\Scripts\activate     # Windows
-# or: source venv/bin/activate  # Linux/Mac
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Place MVTec carpet data in parent directory
-# Expected structure: ../carpet/train/good/, ../carpet/test/*, ../carpet/ground_truth/*
-```
-
----
-
-## Usage
-
-```bash
-cd src
-
-# Train both models
-python train.py --model both
-
-# Train individual model
-python train.py --model padim
-python train.py --model patchcore
-
-# Evaluate pre-trained models only
-python train.py --model both --eval-only
-
-# Show help
-python train.py --help
-```
-
-**Expected output**:
-- Model weights saved to `models/`
-- Result plots saved to `outputs/`
-- Metrics printed to console
-
----
-
-## Technologies Used
-
-| Technology | Purpose |
-|------------|---------|
-| PyTorch | Deep learning framework, pre-trained models |
-| torchvision | ResNet18, image transforms |
-| scikit-learn | AUROC, F1, precision-recall metrics |
-| NumPy | Array operations |
-| SciPy | Gaussian filtering, connected components |
-| Matplotlib | Visualization |
-| tqdm | Progress bars |
 
 ---
 
