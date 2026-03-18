@@ -316,7 +316,6 @@ carpet-anomaly-detection/
 │   └── patchcore_visualizations.png
 ├── requirements.txt        # Dependencies
 ├── README.md              # This file
-└── INTERVIEW_PREP.md      # Interview Q&A reference
 ```
 
 ---
@@ -325,7 +324,7 @@ carpet-anomaly-detection/
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/carpet-anomaly-detection.git
+git clone https://github.com/ugurcanbudak/carpet-anomaly-detection.git
 cd carpet-anomaly-detection
 
 # Create virtual environment
